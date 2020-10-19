@@ -38,6 +38,7 @@
                         'Map tiles by <a target="_top" rel="noopener" href="http://stamen.com">Stamen Design</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" rel="noopener" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
                 }
             },
+            "glyphs": "http://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
             'layers': [
                 {
                     'id': 'simple-tiles',
@@ -51,6 +52,33 @@
         center: [-75.1636, 39.952493],
         zoom: 12
     });
+
+    map.on('load', function() {
+        map.loadImage(
+            'https://upload.wikimedia.org/wikipedia/commons/7/7c/201408_cat.png',
+            function (error, image) {
+                if (error) throw error;
+                map.addImage('pizzaIcon', image);
+
+                map.addSource('pizza', {
+                    type: 'geojson',
+                    data: 'https://raw.githubusercontent.com/kevinearldenny/vector-tiles-mapbox-gl/main/philly_pizza.geojson'
+                })
+                map.addLayer({
+                    "id": "pizza",
+                    "type": "symbol",
+                    "source": "pizza",
+                    "layout": {
+                        "icon-image": "pizzaIcon",
+                        "text-field": "{title}",
+                        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                        "text-offset": [0, 0.6],
+                        "text-anchor": "top"
+                    }
+                });
+    });
+
+
 
 </script>
 </body>
