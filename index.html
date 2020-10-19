@@ -55,7 +55,7 @@
 
     map.on('load', function() {
         map.loadImage(
-            'https://upload.wikimedia.org/wikipedia/commons/7/7c/201408_cat.png',
+            'https://raw.githubusercontent.com/kevinearldenny/vector-tiles-mapbox-gl/gh-pages/pizza_icon.png',
             function (error, image) {
                 if (error) throw error;
                 map.addImage('pizzaIcon', image);
@@ -70,13 +70,15 @@
                     "source": "pizza",
                     "layout": {
                         "icon-image": "pizzaIcon",
+                        "icon-size": 0.12,
                         "text-field": "{title}",
                         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
                         "text-offset": [0, 0.6],
                         "text-anchor": "top"
                     }
                 });
-    });
+            });
+    })
 
 
 
